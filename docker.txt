@@ -12,3 +12,58 @@ sudo systemctl status docker.service
 docker info
 sudo usermod -a -G docker ec2-user  --- optional
 docker help // docker --help
+docker run -it --name myos1 centos:7
+----- inside this container 
+>>> yum install net-tools -y
+>>> yum install httpd -y
+>>> ifconfig
+>>> cd /var/www/html
+>>> vi index.html
+<html>
+  <head>
+    <title>Apache Web Server By Docker</title>
+  </head>
+  <body>
+    <h1>Apache Web Server</h1>
+    <p>This is a simple HTML web page..!! By Mahesh Gontla</p>
+  </body>
+>>> yum install php -y 
+>>> vi index.php
+<pre>
+<?php
+print("Welcome to Apache Web Server By PHP Code");
+print("\n");
+print `ifconfig`;
+?>
+<pre>
+>>> netstat -tnlp
+>>> /usr/sbin/httpd
+>>> netstat -tnlp
+>>> curl ip of container in the inside container/inside the localhost system/ If we try in local windows machine it will fail bcz we are from the public world
+>>> In local system -- type ifconfig 
+>>> docker network will not be exposed to the public world
+>>> docker commit running container-name new-image-name-version
+>>> Run the docker container from the committed image
+>>> after running --- take ip and curl it ----- it will not work 
+>>> cd /var/run/httpd
+>>> inside this httpd.pid file is there
+>>> cat httpd.pid
+>>> If we again run another container with a committed image
+>>> If we check the httpd.pid will not change
+>>> cat /var/run/httpd/httpd.pid
+>>> rm -rf /var/run/httpd/httpd.pid
+>>> cd /root
+>>> ls
+>>> ls -a
+>>> vi .bashrc
+--- rm -rf /var/run/httpd/httpd.pid
+--- /usr/sbin/httpd
+>>> docker commit another image with the editing .bashrc file
+>>> Run the docker container with the docker committed image
+>>> It will automatically work in the container and local system --- but it won't work in the public world for that we have to do patting and natting
+>>> docker run -it --name myphpwebserver3 -p 80:80 myhttpdserverpid:v1 
+>>> sysctl -a | grep ip_forward
+>>> sysctl net.ipv4.conf.all.forwarding=1
+>>> iptables -P FORWARD ACCEPT
+>>> docker rm -f $(docker container ls -a -q)
+>>> Take the public ip of ec2 instance and try it in web browser --- it will work fine
