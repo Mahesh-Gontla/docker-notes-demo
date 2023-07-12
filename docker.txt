@@ -67,3 +67,134 @@ print `ifconfig`;
 >>> iptables -P FORWARD ACCEPT
 >>> docker rm -f $(docker container ls -a -q)
 >>> Take the public ip of ec2 instance and try it in web browser --- it will work fine
+
+
+
+
+
+docker images
+    2  docker image ls
+    3  docker ps 
+    4  docker ps -a 
+    5  ifconfig
+    6  which ifconfig
+    7  rpm -q /usr/sbin/ifconfig
+    8  rpm -q -f /usr/sbin/ifconfig
+    9  history
+   10  rpm -q -f /usr/sbin/ifconfig
+   11  docker container ls -a -q
+   12  docker ps 
+   13  docker ps -a
+   14  docker commit myos1 myifconfigcentos:v1
+   15  docker images
+   16  docker login
+   17  docker run -dit --name myos2  myifconfigcentos:v1
+   18  docker ps -a
+   19  docker attach myos2
+   20  docker inspect myos1
+   21  systemctl status httpd
+   22  rpm -q -f httpd
+   23  rpm -q | grep httpd
+   24  yum install httpd -y
+   25  systemctl status httpd
+   26  vi /usr/lib/systemd/system/httpd.service
+   27  docker ps
+   28  rpm -q httpd
+   29  vi /usr/lib/systemd/system/httpd.service
+   30  curl 172.17.0.2
+   31  curl 172.17.0.2/index.php
+   32  ifconfig
+   33  docker ps 
+   34  docker ps -a
+   35  docker images
+   36  docker commit myos1 myhttpdserver:v1
+   37  docker images
+   38  docker ps -a
+   39  docker commit os1 myhttpdserverpid:v1
+   40  docker images
+   41  docker run -it --name myos2 myhttpdserverpid:v1
+   42  docker ps -a
+   43  docker images
+   44  docker run -it --name myphpwebserver1 -p 80:80 myhttpdserverpid:v1 
+   45  docker run -it --name myphpwebserver2 -p 443:80 myhttpdserverpid:v1 
+   46  docker run -it --name myphpwebserver3 -p 22222:80 myhttpdserverpid:v1 
+   47  sysctl -a | grep ip_forward
+   48  sysctl net.ipv4.conf.all.forwarding=1
+   49  history
+   50  iptables -P FORWARD ACCEPT 
+   51  docker run -it --name myphpwebserver4 -p 22222:80 myhttpdserverpid:v1 
+   52  docker ps -a
+   53  docker rm -rf myphpwebserver3
+   54  docker rm -f myphpwebserver3
+   55  docker run -it --name myphpwebserver4 -p 22222:80 myhttpdserverpid:v1 
+   56  docker run -it --name myphpwebserver6  -p 22222:80 myhttpdserverpid:v1 
+   57  docker rm -f $(docker container ls -a q)
+   58  history
+   59  docker rm -f $(docker container ls -a -q)
+   60  docker images
+   61  docker ps -a
+   62  docker run -it --name myphpwebserver1 -p 80:80 myhttpdserverpid:v1 
+   63  docker images
+   64  docker push myifconfigcentos:v1
+   65  docker login
+   66  docker push myifconfigcentos:v1
+   67  docker tag gontla456/myifconfigcentos:v1
+   68  docker tag myifconfigcentos:v1  gontla456/myifconfigcentos7:v1
+   69  docker images
+   70  docker push gontla456/myifconfigcentos7:v1
+   71  docker tag myhttpdserver:v1 gontla456/myhttpdservercentos7:v2
+   72  docker images
+   73  docker push gontla456/myhttpdservercentos7:v2
+   74  docker tag myhttpdserverpid:v1 gontla456/myhttpdserverpidbashrccentos7:v2
+   75  docker images
+   76  docker push gontla456/myhttpdserverpidbashrccentos7:v2
+   77  history
+
+
+
+
+docker info
+    2  sudo yum update -y
+    3  sudo yum search docker
+    4  sudo yum info docker
+    5  sudo yum install docker
+    6  docker version
+    7  docker info
+    8  sudo systemctl status docker.service
+    9  sudo systemctl start docker.service
+   10  sudo systemctl status docker.service
+   11  sudo systemctl enable docker.service
+   12  sudo systemctl status docker.service
+   13  docker info
+   14  history
+   15  sudo usermod -a -G docker ec2-user
+   16  docker help
+   17  docker --help
+   18  docker images
+   19  docker image ls
+   20  docker pull centos:7
+   21  docker image ls
+   22  docker run -it --name myos1 centos:7
+   23  docker ps -a
+   24  docker attach c6deacff556e
+   25  docker ps -a 
+   26  docker ps
+   27  docker images
+   28  docker rm -f $(docker container ls -a -q)
+   29  docker images
+   30  docker run -it --name myos1 myifconfigcentos:v1
+   31  docker ps
+   32  docker attach myos1
+   33  docker ps -a
+   34  docker images
+   35  docker run -it --name os1 myhttpdserver:v1
+   36  docker ps
+   37  docker images
+   38  curl 172.17.0.4/index.php
+   39  curl 172.17.0.5
+   40  history
+   41  curl 172.17.0.2
+   42  curl 172.17.0.2/index.php
+   43  rpm -q httpd
+   44  yum remove httpd
+   45  history
