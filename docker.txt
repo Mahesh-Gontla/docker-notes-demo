@@ -14,6 +14,7 @@ sudo usermod -a -G docker ec2-user  --- optional
 docker help // docker --help
 docker run -it --name myos1 centos:7
 ----- inside this container 
+>>> yum whatprovides ifconfig 
 >>> yum install net-tools -y
 >>> yum install httpd -y
 >>> ifconfig
@@ -68,8 +69,24 @@ print `ifconfig`;
 >>> docker rm -f $(docker container ls -a -q)
 >>> Take the public ip of ec2 instance and try it in web browser --- it will work fine
 
+docker network --help
+docker network ls
+docker network create --driver bridge myfirstnetwork
+docker network --help
+docker run -dit --name web1 --network myfirstnetwork  myphpapachewebserver:v1
+docker ps -a
+docker network ls
+docker network create --driver bridge mynet1
+docker network ls
+docker network create --driver bridge mynet2 --subnet 192.168.0.0/16
+docker network ls
+docker inspect mynet1
+docker inspect mynet2
+docker run -dit --name web1 --network mynet1  myphpapachewebserver:v1
+docker run -dit --name web2 --network mynet2  myphpapachewebserver:v1
+docker inspect container-ID | grep IP
 
-
+ 
 
 
 docker images
