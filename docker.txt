@@ -89,6 +89,23 @@ docker inspect container-ID | grep IP
  
 
 
+
+docker volume ls 
+docker volume create mystorage_1
+docker volume ls 
+docker rm -f $(docker container ls -a -q)
+docker run -dit --name web1 -v mystorage_1:/var/www/html  myphpapachewebserver:v1
+docker run -dit --name web2 -v mystorage_1:/var/www/html  myphpapachewebserver:v1
+
+docker rm -f $(docker container ls -a -q)
+docker run -dit --name web1 -v mystorage_1:/var/www/html -p 80:80  myphpapachewebserver:v1
+docker run -dit --name web2 -v mystorage_1:/var/www/html -p 80:80  myphpapachewebserver:v1
+
+>>> for installing docker-compose
+wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) 
+sudo mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
+sudo chmod -v +x /usr/local/bin/docker-compose
+
 docker images
     2  docker image ls
     3  docker ps 
